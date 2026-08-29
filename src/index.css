@@ -1,0 +1,133 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  body {
+    @apply bg-abyss font-body text-parchment antialiased;
+    /* Sunlight from the surface, sand at the bottom of the trench. */
+    background-image:
+      radial-gradient(120% 70% at 50% -12%, #17739b 0%, rgba(23, 115, 155, 0) 58%),
+      radial-gradient(90% 55% at 12% 108%, #0d4a63 0%, rgba(13, 74, 99, 0) 62%),
+      linear-gradient(180deg, #062839 0%, #041b29 46%, #031420 100%);
+    background-attachment: fixed;
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-brass ring-offset-2 ring-offset-abyss;
+  }
+
+  ::selection {
+    background: #f7ce3e;
+    color: #041b29;
+  }
+
+  /* Scrollbars, tuned to the trench. */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #12688c transparent;
+  }
+  *::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  *::-webkit-scrollbar-thumb {
+    background: #12688c;
+    border-radius: 999px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+  }
+}
+
+@layer components {
+  /* A laminated menu board floating in the water. */
+  .board {
+    @apply rounded-2xl border border-white/10 bg-trench/70 shadow-board backdrop-blur-sm;
+  }
+
+  .board-parchment {
+    @apply rounded-2xl border-2 border-rope/70 text-abyss shadow-board;
+    background-image:
+      radial-gradient(circle at 18% 12%, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0) 40%),
+      linear-gradient(160deg, #fbf1dc 0%, #f2e0c0 55%, #e8d2ab 100%);
+  }
+
+  .eyebrow {
+    @apply font-ledger text-[11px] uppercase tracking-[0.22em] text-surf/80;
+  }
+
+  .btn {
+    @apply inline-flex select-none items-center justify-center gap-2 rounded-xl px-4 py-2.5
+      font-body text-sm font-extrabold transition
+      active:translate-y-[2px] disabled:cursor-not-allowed disabled:opacity-40 disabled:active:translate-y-0;
+  }
+
+  .btn-primary {
+    @apply btn bg-claw text-white shadow-[0_4px_0_#9c2a17] hover:bg-shell
+      active:shadow-[0_2px_0_#9c2a17] disabled:shadow-[0_4px_0_#9c2a17];
+  }
+
+  .btn-gold {
+    @apply btn bg-brass text-abyss shadow-[0_4px_0_#b3900f] hover:bg-[#ffe073]
+      active:shadow-[0_2px_0_#b3900f];
+  }
+
+  .btn-ghost {
+    @apply btn border border-white/15 bg-white/5 text-parchment hover:border-surf/50 hover:bg-white/10;
+  }
+
+  .btn-sm {
+    @apply px-2.5 py-1.5 text-xs;
+  }
+
+  .field {
+    @apply w-full rounded-lg border border-white/12 bg-abyss/55 px-3 py-2 text-sm text-parchment
+      placeholder:text-parchment/35 focus:border-surf/70 focus:outline-none focus:ring-2 focus:ring-surf/25;
+  }
+
+  .chip {
+    @apply inline-flex items-center gap-1 rounded-full border border-white/12 bg-white/5
+      px-2.5 py-1 font-ledger text-[10px] uppercase tracking-wider text-parchment/75;
+  }
+
+  .sign-title {
+    @apply font-sign uppercase leading-none tracking-tight text-brass;
+    text-shadow:
+      0 2px 0 #7a4f27,
+      0 4px 10px rgba(0, 0, 0, 0.55);
+  }
+}
+
+@layer utilities {
+  .numerals {
+    font-variant-numeric: tabular-nums;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+}
+
+/* Anyone who asked for less motion gets a still ocean. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
